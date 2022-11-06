@@ -4,6 +4,7 @@ namespace DemoWebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Produces("application/json")] //設定回傳的Media type的格式
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
