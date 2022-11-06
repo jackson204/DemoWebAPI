@@ -44,12 +44,11 @@ public class WeatherForecastController : ControllerBase
     {
         return $"create id = {id}";
     }
+
     //使用action 關鍵字會印出方法名稱
     [HttpGet, Route("[action]")] //WeatherForecast/GetAll
     public string GetAll()
     {
         return $"Get All";
     }
-    
-
 }
