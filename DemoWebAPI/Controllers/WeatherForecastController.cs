@@ -1,3 +1,4 @@
+using DemoWebAPI.Filters;
 using DemoWebAPI.Model;
 using DemoWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -85,14 +86,15 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost, Route("/CreateOrder")]
-    public string CreateOrder([FromBody] Order order)
+    [OrderVaildationFilter]
+    public string CreateOrder([FromBody] Order order2)
     {
-        if (order == null)
+        if (order2 == null)
         {
             return "parameter are null";
         }
 
-        return $" Create Success . OrderId = {order.Id}";
+        return $" Create Success . OrderId = {order2.Id}";
     }
 
     [HttpPut, Route("/UpdateOrder")]
