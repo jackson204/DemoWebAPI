@@ -23,4 +23,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// https://localhost:7119/
+app.Map("/" , () =>"test WebAPi" );
+
 app.Run();
