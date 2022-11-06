@@ -1,3 +1,4 @@
+using DemoWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebAPI.Controllers;
@@ -13,10 +14,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IMyService _myService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IMyService myService)
     {
         _logger = logger;
+        _myService = myService;
     }
 
     /// <summary>獲取天氣預報</summary>
@@ -25,6 +28,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
+        _myService.SendMessage("Hi DI");
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
