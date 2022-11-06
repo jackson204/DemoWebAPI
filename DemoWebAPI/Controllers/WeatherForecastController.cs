@@ -25,7 +25,7 @@ public class WeatherForecastController : ControllerBase
     /// <summary>獲取天氣預報</summary>
     /// <remarks>補充說明</remarks>
     /// <response code = "400">無資料</response>
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet, Route("GetWeatherForecast")] //WeatherForecast/GetWeatherForecast
     public IEnumerable<WeatherForecast> Get()
     {
         _myService.SendMessage("Hi DI");
@@ -37,4 +37,19 @@ public class WeatherForecastController : ControllerBase
             })
             .ToArray();
     }
+
+    //寫法一 :[HttpPost, Route("[action]/{id}")] //WeatherForecast/Create/1
+    [HttpPost, Route("/insert/{id}")] //insert/1
+    public string Create(int id)
+    {
+        return $"create id = {id}";
+    }
+    //使用action 關鍵字會印出方法名稱
+    [HttpGet, Route("[action]")] //WeatherForecast/GetAll
+    public string GetAll()
+    {
+        return $"Get All";
+    }
+    
+
 }
