@@ -1,4 +1,5 @@
 using System.Reflection;
+using DemoWebAPI.Model;
 using DemoWebAPI.Services;
 using Microsoft.OpenApi.Models;
 
@@ -9,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // {
 //     options.AddDebug();
 // });
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+{
+    // 關閉驗證失敗時自動 HTTP 400 回應
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

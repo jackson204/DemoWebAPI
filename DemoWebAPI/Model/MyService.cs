@@ -1,4 +1,6 @@
-﻿namespace DemoWebAPI.Services;
+﻿using DemoWebAPI.Services;
+
+namespace DemoWebAPI.Model;
 
 public class MyService : IMyService
 {

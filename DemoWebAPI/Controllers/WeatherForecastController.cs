@@ -1,3 +1,4 @@
+using DemoWebAPI.Model;
 using DemoWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,5 +51,58 @@ public class WeatherForecastController : ControllerBase
     public string GetAll()
     {
         return $"Get All";
+    }
+
+    // [FromBody] - 從 Request body 取值  當套用該屬性時,如果物件還有其他的屬性會忽略其他屬性，一律使用 body ex:CreateOrder()
+    // [FromForm] - 從 Request body 中的表單資料取值
+    // [FromHeader] - 從 Request header 取值
+    // [FromQuery] - 從 Query String 取值
+    // [FromRoute] - 從目前要求的路由變數取值
+    // [FromServices] - 從 DI 容器中取得服務物件
+
+    // [HttpGet, Route("/QueryOrderProduct/{oid}/product")]//QueryOrderProduct/1/product?pid=22
+    // public string GetOrderProduct(int oid, [FromQuery] int pid)
+    // {
+    //     if (pid == default)
+    //     {
+    //         return $"OrderId = {oid}";
+    //     }
+    //     return $"OrderId = {oid} Product = {pid}";
+    // }
+
+    [HttpGet, Route("/QueryOrderProduct/{oid}/product")]
+    public string GetOrderProduct([FromQuery] Order order)
+    {
+        if (order == null)
+        {
+            return "parameter are null";
+        }
+        if (order.ProductId == default)
+        {
+            return $"OrderId = {order.Id} , Name = {order.Name} , Price = {order.Price}";
+        }
+        return $"OrderId = {order.Id} , Name = {order.Name} , Price = {order.Price} ,ProductId = {order.ProductId}";
+    }
+
+    [HttpPost, Route("/CreateOrder")]
+    public string CreateOrder([FromBody] Order order)
+    {
+        if (order == null)
+        {
+            return "parameter are null";
+        }
+
+        return $" Create Success . OrderId = {order.Id}";
+    }
+
+    [HttpPut, Route("/UpdateOrder")]
+    public string UpdateOrder([FromBody] Order order)
+    {
+        if (order == null)
+        {
+            return "parameter are null";
+        }
+
+        return $" Update Success . OrderId = {order.Id}";
     }
 }
