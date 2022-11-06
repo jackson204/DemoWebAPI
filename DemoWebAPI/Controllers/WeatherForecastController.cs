@@ -18,6 +18,9 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
+    /// <summary>獲取天氣預報</summary>
+    /// <remarks>補充說明</remarks>
+    /// <response code = "400">無資料</response>
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
