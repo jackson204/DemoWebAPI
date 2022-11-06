@@ -1,4 +1,5 @@
 using System.Reflection;
+using DemoWebAPI.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,8 +24,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,fileName));
 });
 
-
-
+builder.Services.AddScoped<IMyService, MyService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,6 +41,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 // https://localhost:7119/
-app.Map("/" , () =>"test WebAPi" );
+app.Map("/", () => "test WebAPi");
 
 app.Run();
