@@ -1,4 +1,7 @@
 using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using DemoWebAPI;
 using DemoWebAPI.Model;
 using DemoWebAPI.Services;
 using Microsoft.OpenApi.Models;
@@ -12,10 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 // });
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
-{
-    // 關閉驗證失敗時自動 HTTP 400 回應
-    options.SuppressModelStateInvalidFilter = true;
-});
+    {
+        // 關閉驗證失敗時自動 HTTP 400 回應
+        options.SuppressModelStateInvalidFilter = true;
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -30,7 +33,22 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, fileName));
 });
 
-builder.Services.AddScoped<IMyService, MyService>();
+#region 寫法一: Autofac的DI 註冊
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+{
+    containerBuilder.AutofacRegister();
+});
+
+#endregion
+
+#region 寫法二: 微軟的DI 註冊
+
+// builder.Services.AddScoped<IMyService, MyService>();
+
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
