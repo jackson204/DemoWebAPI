@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace DemoWebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]        //https://learn.microsoft.com/zh-tw/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
+[Route("[controller]")] //https://learn.microsoft.com/zh-tw/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
 [Produces("application/json")] //設定回傳的Media type的格式
-[VersionResourceFilter]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -86,32 +85,9 @@ public class WeatherForecastController : ControllerBase
         return $"OrderId = {order.Id} , Name = {order.Name} , Price = {order.Price} ,ProductId = {order.ProductId}";
     }
 
-    //ActionFilter
-    // [HttpPost, Route("/CreateOrder")]
-    // [OrderValidationFilter]
-    // public string CreateOrder([FromBody] Order order2)
-    // {
-    //     if (order2 == null)
-    //     {
-    //         return "parameter are null";
-    //     }
-    //
-    //     return $" Create Success . OrderId = {order2.Id}";
-    // }
-
     [HttpPost, Route("/CreateOrder")]
+    [OrderValidationFilter]
     public string CreateOrder([FromBody] Order order2)
-    {
-        if (order2 == null)
-        {
-            return "parameter are null";
-        }
-    
-        return $" Create Success . OrderId = {order2.Id}";
-    }
-    
-    [HttpPost, Route("/CreateOrder/V2")]
-    public string CreateOrderV2([FromBody] Order order2)
     {
         if (order2 == null)
         {
