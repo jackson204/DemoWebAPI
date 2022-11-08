@@ -8,7 +8,7 @@ namespace DemoWebAPI.Controllers;
 [ApiController]
 [Route("[controller]")]        //https://learn.microsoft.com/zh-tw/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
 [Produces("application/json")] //設定回傳的Media type的格式
-
+[AddHeaderResultFilter("role" , "admin")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
