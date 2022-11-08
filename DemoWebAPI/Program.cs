@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 透過 builder.Services 將服務加入 DI 容器
+
 // Add services to the container.
 // builder.Services.AddLogging(options =>
 // {
@@ -49,9 +51,10 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 
 #endregion
 
+// 建立 WebApplication 物件
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline. 透過 app 設定 Middlewares (HTTP request pipeline)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
