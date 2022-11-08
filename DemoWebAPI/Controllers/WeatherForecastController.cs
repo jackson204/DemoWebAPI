@@ -71,7 +71,7 @@ public class WeatherForecastController : ControllerBase
     //     return $"OrderId = {oid} Product = {pid}";
     // }
 
-    [HttpGet, Route("/QueryOrderProduct/{oid}/product")]
+    [HttpGet, Route("/QueryOrderProduct/{oid}/product")] //QueryOrderProduct/1/product?pid=22
     public string GetOrderProduct([FromQuery] Order order)
     {
         if (order == null)
@@ -86,7 +86,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost, Route("/CreateOrder")]
-    [OrderVaildationFilter]
+    [OrderValidationFilter]
     public string CreateOrder([FromBody] Order order2)
     {
         if (order2 == null)
