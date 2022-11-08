@@ -2,6 +2,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DemoWebAPI;
+using DemoWebAPI.Filters;
 using DemoWebAPI.Model;
 using DemoWebAPI.Services;
 using Microsoft.OpenApi.Models;
@@ -15,7 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 // {
 //     options.AddDebug();
 // });
-builder.Services.AddControllers()
+builder.Services.AddControllers(
+        options => options.Filters.Add<VersionResourceFilter>()
+        )
     .ConfigureApiBehaviorOptions(options =>
     {
         // 關閉驗證失敗時自動 HTTP 400 回應
