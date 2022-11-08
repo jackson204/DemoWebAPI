@@ -9,8 +9,9 @@ namespace DemoWebAPI.Filters;
 /// </summary>
 public class OrderValidationFilter : ActionFilterAttribute
 {
+    ///https://learn.microsoft.com/zh-tw/dotnet/api/microsoft.aspnetcore.mvc.filters.actionfilterattribute?view=aspnetcore-7.0
     /// <summary>
-    /// 
+    /// 在動作執行之前呼叫，在模型系結完成之後呼叫。
     /// </summary>
     /// <param name="context"></param>
     public override void OnActionExecuting(ActionExecutingContext context)
