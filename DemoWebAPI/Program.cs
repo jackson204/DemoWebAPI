@@ -27,6 +27,9 @@ builder.Services.AddControllers(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//https://ithelp.ithome.com.tw/articles/10195190
+//Swagger 產生器是負責取得 API 的規格並產生 SwaggerDocument 物件。
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo()
@@ -39,7 +42,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 #region 寫法一: Autofac的DI 註冊
-
+//https: //ithelp.ithome.com.tw/articles/10193172
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
@@ -60,7 +63,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline. 透過 app 設定 Middlewares (HTTP request pipeline)
 if (app.Environment.IsDevelopment())
 {
+    //Swagger Middleware 負責路由，提供 SwaggerDocument 物件。
+    // 可以從 URL 查看 Swagger 產生器產生的 SwaggerDocument 物件。
     app.UseSwagger();
+    //SwaggerUI 是負責將 SwaggerDocument 物件變成漂亮的介面。
     app.UseSwaggerUI();
 }
 //https://ithelp.ithome.com.tw/articles/10192682
