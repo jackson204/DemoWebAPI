@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebAPI.Controllers;
 
-[ApiController]
+[ApiController]//https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-6.0
 [Route("[controller]")]        //https://learn.microsoft.com/zh-tw/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
 [Produces("application/json")] //設定回傳的Media type的格式
 [AddHeaderResultFilter("role" , "admin")]//https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-6.0

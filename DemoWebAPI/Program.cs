@@ -63,11 +63,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//https://ithelp.ithome.com.tw/articles/10192682
+// app.Use(async (context, next) => 
+// {
+//     Console.WriteLine("First Middleware in.");
+//     // await context.Response.WriteAsync("First Middleware in. \r\n");
+//     await next.Invoke();
+//     Console.WriteLine("First Middleware out");
+//     // await context.Response.WriteAsync("First Middleware out. \r\n");
+// });
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+//Map 是能用來處理一些簡單路由的 Middleware，可依照不同的 URL 指向不同的 Run 及註冊不同的 Use。
 app.MapControllers();
 
 // https://localhost:7119/

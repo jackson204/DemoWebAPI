@@ -22,7 +22,10 @@ public class OrderValidationFilter : ActionFilterAttribute
         KeyValuePair<string, object?> order = contextActionArguments.FirstOrDefault(s => s.Key == "order2");
         if (order.Value != null && (order.Value as Order)?.Name == "phone")
         {
-            context.ModelState.AddModelError("error", "order name was wrong .");
+            context.ModelState.AddModelError("errorD", "order name was wrong .");
+            context.ModelState.AddModelError("errorC", "order name was wrong .");
+            context.ModelState.AddModelError("errorB", "order name was wrong .");
+            context.ModelState.AddModelError("errorA", "order name was wrong .");
             context.Result = new BadRequestObjectResult(context.ModelState);
         }
     }
