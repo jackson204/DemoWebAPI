@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebAPI.Controllers;
 
-[ApiController]//https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-6.0
-[Route("[controller]")]        //https://learn.microsoft.com/zh-tw/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
-[Produces("application/json")] //設定回傳的Media type的格式
-[AddHeaderResultFilter("role" , "admin")]//https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-6.0
+[ApiController]                          //https://learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-6.0
+[Route("[controller]")]                  //https://learn.microsoft.com/zh-tw/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
+[Produces("application/json")]           //設定回傳的Media type的格式
+[AddHeaderResultFilter("role", "admin")] //https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-6.0
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -106,10 +106,10 @@ public class WeatherForecastController : ControllerBase
         {
             return "parameter are null";
         }
-    
+
         return $" Create Success . OrderId = {order2.Id}";
     }
-    
+
     [HttpPost, Route("/CreateOrder/V2")]
     public string CreateOrderV2([FromBody] Order order2)
     {
@@ -131,4 +131,36 @@ public class WeatherForecastController : ControllerBase
 
         return $" Update Success . OrderId = {order.Id}";
     }
+
+    // [HttpGet, Route("/GetOrder{oid}/v2")]
+    // public IActionResult Get(int oid)
+    // {
+    //     if (oid > 1)
+    //     {
+    //         return Ok(new Order() {Id = oid});
+    //     }
+    //     if (oid == default)
+    //     {
+    //         return BadRequest();
+    //     }
+    //     return NoContent();
+    // }
+
+    #region ActionResult<T> 同時支援特定類別和IActionResult
+
+    [HttpGet, Route("/GetOrder{oid}/v2")]
+    public ActionResult<Order> Get(int oid)
+    {
+        if (oid > 1)
+        {
+            return new Order {Id = oid};
+        }
+        if (oid == default)
+        {
+            return BadRequest();
+        }
+        return NoContent();
+    }
+
+    #endregion
 }

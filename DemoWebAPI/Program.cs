@@ -42,6 +42,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 #region 寫法一: Autofac的DI 註冊
+
 //https: //ithelp.ithome.com.tw/articles/10193172
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
@@ -66,6 +67,7 @@ if (app.Environment.IsDevelopment())
     //Swagger Middleware 負責路由，提供 SwaggerDocument 物件。
     // 可以從 URL 查看 Swagger 產生器產生的 SwaggerDocument 物件。
     app.UseSwagger();
+
     //SwaggerUI 是負責將 SwaggerDocument 物件變成漂亮的介面。
     app.UseSwaggerUI();
 }
