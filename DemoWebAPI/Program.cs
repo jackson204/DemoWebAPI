@@ -71,6 +71,8 @@ if (app.Environment.IsDevelopment())
     //SwaggerUI 是負責將 SwaggerDocument 物件變成漂亮的介面。
     app.UseSwaggerUI();
 }
+
+
 //https://ithelp.ithome.com.tw/articles/10192682
 // app.Use(async (context, next) => 
 // {
@@ -81,6 +83,8 @@ if (app.Environment.IsDevelopment())
 //     // await context.Response.WriteAsync("First Middleware out. \r\n");
 // });
 
+//因為目前有 VersionResourceFilter 的關係 
+app.UseExceptionHandler("/v2/error");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

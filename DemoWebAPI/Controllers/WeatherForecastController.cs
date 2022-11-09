@@ -163,4 +163,10 @@ public class WeatherForecastController : ControllerBase
     }
 
     #endregion
+    
+    [HttpPost, Route("/For_Error_CreateOrder/V2")]
+    public string For_Error_CreateOrderV2([FromBody] Order order2)
+    {
+        throw new NullReferenceException("order is null");
+    }
 }
