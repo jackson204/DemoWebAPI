@@ -2,9 +2,11 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DemoWebAPI;
+using DemoWebAPI.Database;
 using DemoWebAPI.Filters;
 using DemoWebAPI.Model;
 using DemoWebAPI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 // {
 //     options.AddDebug();
 // });
+builder.Services.AddDbContextPool<RicoDbContext>(optinos => {
+    optinos.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
+});
 builder.Services.AddControllers(
         options => options.Filters.Add<VersionResourceFilter>()
         )

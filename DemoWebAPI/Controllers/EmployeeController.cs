@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DemoWebAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebAPI.Controllers;
 
@@ -34,15 +35,4 @@ public class EmployeeController : ControllerBase
     {
         return Ok($" Delete a Employee by {id} ");
     }
-}
-
-public class Employee
-{
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-
-    public int Age { get; set; }
-
-    public DateTime CreatedDate { get; set; }
 }

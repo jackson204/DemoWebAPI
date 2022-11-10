@@ -1,4 +1,5 @@
 ﻿using DemoWebAPI.Model;
+using DemoWebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
