@@ -90,6 +90,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 //Map 是能用來處理一些簡單路由的 Middleware，可依照不同的 URL 指向不同的 Run 及註冊不同的 Use。
+//呼叫 MapControllers才能對應Controller的屬性路由,算是http request pipeline的一個分支
 app.MapControllers();
 
 // https://localhost:7119/
