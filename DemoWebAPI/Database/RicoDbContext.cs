@@ -1,4 +1,5 @@
 ﻿using DemoWebAPI.Controllers;
+using DemoWebAPI.Database.EntityConfigurations;
 using DemoWebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +15,11 @@ namespace DemoWebAPI.Database
         {
 
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+        }
      
     }
 }
